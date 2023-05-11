@@ -1,38 +1,93 @@
-.App {
+.customer-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.customer-row {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.customer-row.header-row {
+  font-weight: bold;
+  background-color: #f2f2f2;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.customer-row div {
+  flex: 1;
+  text-align: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.customer-row span {
+  margin-right: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.edit-button,
+.save-button,
+.cancel-button {
+  padding: 5px 10px;
+  margin-left: 10px;
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.edit-button {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.save-button {
+  background-color: #27ae60;
+  color: #fff;
+}
+
+.cancel-button {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+.customer-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.customer-table th,
+.customer-table td {
+  padding: 8px;
+  text-align: center;
+}
+
+.customer-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.customer-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.customer-table .edit-button,
+.customer-table .save-button,
+.customer-table .cancel-button {
+  padding: 5px 10px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.customer-table .edit-button {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.customer-table .save-button {
+  background-color: #27ae60;
+  color: #fff;
+}
+
+.customer-table .cancel-button {
+  background-color: #e74c3c;
+  color: #fff;
 }
