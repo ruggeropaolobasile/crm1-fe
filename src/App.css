@@ -91,3 +91,31 @@
   background-color: #e74c3c;
   color: #fff;
 }
+
+/* Stile per risolvere gli elementi troppo attaccati al bordo della pagina */
+body {
+  margin: 20px;
+}
+
+/* Stile per rendere il dettaglio grigio come l'elemento di modifica */
+.detail {
+  background-color: #f2f2f2;
+}
+
+/* Stile per bilanciare gli elementi Name, Email, ecc. */
+.label {
+  display: inline-block;
+  width: 100px;
+}
+
+/* Stile per la sezione Customer Detail */
+.customer-detail {
+  margin-bottom: 20px;
+}
+
+/* Stile per la sezione Interaction */
+.interaction {
+  background-color: #f9f9f9;
+  padding: 10px;
+  margin-bottom: 10px;
+}
