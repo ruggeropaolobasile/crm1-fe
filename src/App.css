@@ -1,24 +1,20 @@
-.customer-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-.customer-row {
+.customer-row,
+.header-row {
   display: flex;
-  align-items: center;
+  align-items: left;
   padding: 10px;
-  border-bottom: 1px solid #ccc;
-  text-align: center;
+  border-bottom: 1px solid #e6ae59;
+  text-align: left;
 }
 
-.customer-row.header-row {
+.header-row {
   font-weight: bold;
   background-color: #f2f2f2;
 }
 
 .customer-row div {
   flex: 1;
-  text-align: center;
+  text-align: left;
 }
 
 .customer-row span {
@@ -38,6 +34,14 @@
   color: #fff;
 }
 
+.detail-button {
+  background-color: #db830f;
+  color: #fff;
+  padding: 5px 10px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
 .save-button {
   background-color: #27ae60;
   color: #fff;
@@ -51,13 +55,11 @@
 .customer-table {
   width: 100%;
   border-collapse: collapse;
-  text-align: center;
 }
 
 .customer-table th,
 .customer-table td {
   padding: 8px;
-  text-align: center;
 }
 
 .customer-table th {
@@ -92,30 +94,45 @@
   color: #fff;
 }
 
-/* Stile per risolvere gli elementi troppo attaccati al bordo della pagina */
 body {
   margin: 20px;
 }
 
-/* Stile per rendere il dettaglio grigio come l'elemento di modifica */
 .detail {
   background-color: #f2f2f2;
 }
 
-/* Stile per bilanciare gli elementi Name, Email, ecc. */
 .label {
   display: inline-block;
   width: 100px;
 }
 
-/* Stile per la sezione Customer Detail */
 .customer-detail {
   margin-bottom: 20px;
 }
 
-/* Stile per la sezione Interaction */
 .interaction {
   background-color: #f9f9f9;
   padding: 10px;
   margin-bottom: 10px;
+}
+
+.app-container {
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.app-title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.app-search-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 20px;
 }

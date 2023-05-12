@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Rating } from "react-simple-star-rating";
+import "./CustomerDetail.css";
 
 function CustomerDetail({ customerId }) {
   const [customer, setCustomer] = useState(null);
@@ -84,36 +86,46 @@ function CustomerDetail({ customerId }) {
   }
 
   return (
-    <div>
-      <h1>Customer Detail</h1>
-      <div>ID: {customer.id}</div>
-      <div>Name: {customer.name}</div>
-      <div>Email: {customer.email}</div>
-      <div>Phone: {customer.phoneNumber}</div>
-      <div>Address:</div>
-      <div>Street: {address.street}</div>
-      <div>City: {address.city}</div>
-      <div>State: {address.state}</div>
-      <div>Zip Code: {address.zipCode}</div>
+    <div className="customer-details">
+      <div className="customer-fields">
+        <h1>Customer Detail</h1>
+        <div>ID: {customer.id}</div>
+        <div>Name: {customer.name}</div>
+        <div>Email: {customer.email}</div>
+        <div>Phone: {customer.phoneNumber}</div>
+        <div className="rating">
+          Rating:
+          <Rating
+            initialValue={customer.rating}
+            size={20}
+            disabled={true}
+            className="star-rating"
+          />
+        </div>
+        <div className="address">
+          <div>Address:</div>
+          <div>Street: {address.street}</div>
+          <div>City: {address.city}</div>
+          <div>State: {address.state}</div>
+          <div>Zip Code: {address.zipCode}</div>
+        </div>
+
+      </div>
 
       <h2>Interactions</h2>
-      <ul>
+      <ul className="interaction-list">
         {interactions.map((interaction) => (
-          <li key={interaction.id}>
-            Type: {interaction.type}
-            <br />
-            Description: {interaction.description}
-            <br />
-            Date: {interaction.date}
-            <br />
-            Duration: {interaction.duration}
-            <br />
-            Outcome: {interaction.outcome}
+          <li key={interaction.id} className="interaction-item">
+            <div>Type: {interaction.type}</div>
+            <div>Description: {interaction.description}</div>
+            <div>Date: {interaction.date}</div>
+            <div>Duration: {interaction.duration}</div>
+            <div>Outcome: {interaction.outcome}</div>
           </li>
         ))}
       </ul>
 
-      <div>
+      <div className="new-interaction">
         <h2>New Interaction</h2>
         <div>
           <label>Type:</label>

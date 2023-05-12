@@ -1,32 +1,55 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './App.css';
-import CustomerRow from './CustomerRow';
-import { get, put } from './apiService';
-import CustomerDetail from './components/CustomerDetail';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./App.css";
+import CustomerRow from "./CustomerRow";
+import { get, put } from "./apiService";
+import CustomerDetail from "./components/CustomerDetail";
 
 function App() {
   const [customers, setCustomers] = useState([]);
   const [selectedCustomerId, setSelectedCustomerId] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [error, setError] = useState(null);
+  const [errorList, setErrorList] = useState([]);
 
   useEffect(() => {
     fetchCustomers();
   }, []);
 
   const fetchCustomers = async () => {
-    const customersData = await get('customers');
-    setCustomers(customersData);
+    try {
+      const customersData = await get("customers");
+      setCustomers(customersData);
+      setError(null);
+    } catch (error) {
+      setError(
+        "Errore durante il recupero dei dati dei clienti. Possibili cause includono:"
+      );
+      setErrorList([
+        "Problemi di connessione al server - il back end non è in run",
+        "Il server non è in esecuzione o non è raggiungibile",
+        "Errore interno del server",
+        "Endpoint API non corretto",
+      ]);
+    }
   };
 
   const handleUpdateCustomer = async (updatedCustomer) => {
-    const response = await put(`customers/${updatedCustomer.id}`, updatedCustomer);
-    if (response) {
-      setCustomers((prevCustomers) =>
-        prevCustomers.map((customer) =>
-          customer.id === updatedCustomer.id ? response : customer
-        )
+    try {
+      const response = await put(
+        `customers/${updatedCustomer.id}`,
+        updatedCustomer
       );
+      if (response) {
+        setCustomers((prevCustomers) =>
+          prevCustomers.map((customer) =>
+            customer.id === updatedCustomer.id ? response : customer
+          )
+        );
+      }
+      setError(null);
+    } catch (error) {
+      setError("Errore durante l'aggiornamento del cliente.");
     }
   };
 
@@ -47,11 +70,17 @@ function App() {
   );
 
   return (
-    <div>
-      <h1>Customers</h1>
-      
-      <input type="text" placeholder="Search by name" value={searchQuery} onChange={handleSearch} />
-      
+    <div className="app-container">
+      <h1 className="app-title">Customers</h1>
+
+      <input
+        className="app-search-input"
+        type="text"
+        placeholder="Search by name"
+        value={searchQuery}
+        onChange={handleSearch}
+      />
+
       {filteredCustomers.map((customer) => (
         <CustomerRow
           key={customer.id}
@@ -60,12 +89,23 @@ function App() {
           onOpenDetail={handleOpenDetail}
         />
       ))}
-      
+
       {selectedCustomerId && (
         <CustomerDetail
           customerId={selectedCustomerId}
           onCloseDetail={handleCloseDetail}
         />
+      )}
+
+      {error && (
+        <div className="error-message">
+          {error}
+          <ul className="error-list">
+            {errorList.map((errorMessage) => (
+              <li key={errorMessage}>{errorMessage}</li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );

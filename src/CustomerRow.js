@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { put, get } from './apiService';
+import React, { useState, useEffect } from "react";
+import { put, get } from "./apiService";
 
 function CustomerRow({ customer, onUpdate, onOpenDetail }) {
   const [editing, setEditing] = useState(false);
@@ -32,15 +32,15 @@ function CustomerRow({ customer, onUpdate, onOpenDetail }) {
       id: customer.id,
       name,
       email,
-      phoneNumber
+      phoneNumber,
     };
 
     put(`customers/${customer.id}`, updatedCustomer)
-      .then(response => {
+      .then((response) => {
         onUpdate(response);
         setEditing(false);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   };
@@ -58,11 +58,27 @@ function CustomerRow({ customer, onUpdate, onOpenDetail }) {
       {editing ? (
         <>
           <div>ID: {customer.id}</div>
-          <input type="text" value={name} onChange={e => setName(e.target.value)} />
-          <input type="text" value={email} onChange={e => setEmail(e.target.value)} />
-          <input type="text" value={phoneNumber} onChange={e => setPhoneNumber(e.target.value)} />
-          <button className="save-button" onClick={handleSave}>Save</button>
-          <button className="cancel-button" onClick={handleCancel}>Cancel</button>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <input
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="text"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+          />
+          <button className="save-button" onClick={handleSave}>
+            Save
+          </button>
+          <button className="cancel-button" onClick={handleCancel}>
+            Cancel
+          </button>
         </>
       ) : (
         <>
@@ -70,8 +86,12 @@ function CustomerRow({ customer, onUpdate, onOpenDetail }) {
           <span>Name: {customer.name}</span>
           <span>Email: {customer.email}</span>
           <span>Phone: {customer.phoneNumber}</span>
-          <button className="edit-button" onClick={handleEdit}>Edit</button>
-          <button className="detail-button" onClick={handleOpenDetail}>Detail</button>
+          <button className="edit-button" onClick={handleEdit}>
+            Edit
+          </button>
+          <button className="detail-button" onClick={handleOpenDetail}>
+            Detail
+          </button>
         </>
       )}
       {address && (
