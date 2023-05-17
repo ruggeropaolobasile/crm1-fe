@@ -86,7 +86,7 @@ function CustomerDetail({ customerId }) {
   }
 
   return (
-    <div className="customer-details">
+    <div className="container customer-details">
       <div className="customer-fields">
         <h1>Customer Detail</h1>
         <div>ID: {customer.id}</div>
@@ -109,38 +109,54 @@ function CustomerDetail({ customerId }) {
           <div>State: {address.state}</div>
           <div>Zip Code: {address.zipCode}</div>
         </div>
-
       </div>
 
       <h2>Interactions</h2>
-      <ul className="interaction-list">
-        {interactions.map((interaction) => (
-          <li key={interaction.id} className="interaction-item">
-            <div>Type: {interaction.type}</div>
-            <div>Description: {interaction.description}</div>
-            <div>Date: {interaction.date}</div>
-            <div>Duration: {interaction.duration}</div>
-            <div>Outcome: {interaction.outcome}</div>
-          </li>
-        ))}
-      </ul>
+      <table className="table table-striped interaction-table">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Duration</th>
+            <th>Outcome</th>
+          </tr>
+        </thead>
+        <tbody>
+          {interactions.map((interaction) => (
+            <tr key={interaction.id} className="interaction-row">
+              <td>{interaction.type}</td>
+              <td>{interaction.description}</td>
+              <td>{interaction.date}</td>
+              <td>{interaction.duration}</td>
+              <td>{interaction.outcome}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
 
       <div className="new-interaction">
-        <h2>New Interaction</h2>
-        <div>
-          <label>Type:</label>
+        <h2>Sezione New Interaction</h2>
+        <label htmlFor="interactionType">Interaction Type:</label>
+        <select
+          id="interactionType"
+          className="form-control"
+          value={newInteraction.type}
+          onChange={(event) =>
+            setNewInteraction({ ...newInteraction, type: event.target.value })
+          }
+        >
+          <option value="">Select Type</option>
+          <option value="chiamata in ingresso">Chiamata in Ingresso</option>
+          <option value="chiamata in uscita">Chiamata in Uscita</option>
+        </select>
+
+        <div className="form-group">
+          <label htmlFor="description">Description:</label>
           <input
             type="text"
-            value={newInteraction.type}
-            onChange={(event) =>
-              setNewInteraction({ ...newInteraction, type: event.target.value })
-            }
-          />
-        </div>
-        <div>
-          <label>Description:</label>
-          <input
-            type="text"
+            id="description"
+            className="form-control"
             value={newInteraction.description}
             onChange={(event) =>
               setNewInteraction({
@@ -148,22 +164,31 @@ function CustomerDetail({ customerId }) {
                 description: event.target.value,
               })
             }
+            required
           />
+          {newInteraction.description === "" && (
+            <small className="text-danger">Description is required</small>
+          )}
         </div>
-        <div>
-          <label>Date:</label>
+
+        <div className="form-group">
+          <label htmlFor="date">Date:</label>
           <input
             type="text"
+            id="date"
+            className="form-control"
             value={newInteraction.date}
             onChange={(event) =>
               setNewInteraction({ ...newInteraction, date: event.target.value })
             }
           />
         </div>
-        <div>
-          <label>Duration:</label>
+        <div className="form-group">
+          <label htmlFor="duration">Duration:</label>
           <input
             type="text"
+            id="duration"
+            className="form-control"
             value={newInteraction.duration}
             onChange={(event) =>
               setNewInteraction({
@@ -173,10 +198,12 @@ function CustomerDetail({ customerId }) {
             }
           />
         </div>
-        <div>
-          <label>Outcome:</label>
+        <div className="form-group">
+          <label htmlFor="outcome">Outcome:</label>
           <input
             type="text"
+            id="outcome"
+            className="form-control"
             value={newInteraction.outcome}
             onChange={(event) =>
               setNewInteraction({
@@ -186,7 +213,9 @@ function CustomerDetail({ customerId }) {
             }
           />
         </div>
-        <button onClick={createNewInteraction}>Create Interaction</button>
+        <button className="btn btn-primary" onClick={createNewInteraction}>
+          Create Interaction
+        </button>
       </div>
     </div>
   );

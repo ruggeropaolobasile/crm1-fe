@@ -1,11 +1,4 @@
-.customer-row,
-.header-row {
-  display: flex;
-  align-items: left;
-  padding: 10px;
-  border-bottom: 1px solid #e6ae59;
-  text-align: left;
-}
+
 
 .header-row {
   font-weight: bold;

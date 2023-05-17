@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
-import CustomerRow from "./CustomerRow";
+import CustomerRow from "./components/CustomerRow";
 import { get, put } from "./apiService";
 import CustomerDetail from "./components/CustomerDetail";
 

@@ -28,7 +28,7 @@ function NewInteractionForm({ onCreateInteraction }) {
       <h2>New Interaction</h2>
       <div>
         <label>Type:</label>
-        <input type="text" name="type" value={interactionData.type} onChange={handleChange} />
+        <input type="text" name="type" value={interactionData.type} onChange={handleChange} required />
       </div>
       <div>
         <label>Description:</label>

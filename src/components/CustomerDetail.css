@@ -17,3 +17,15 @@
     background-color: #f2f2f2;
     padding: 10px;
   }
+
+  .customer-row {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+  }
+  
+  .customer-row .address-details {
+    margin-top: 10px;
+  }

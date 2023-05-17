@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { put, get } from "./apiService";
+import { put, get } from "../apiService";
 
 function CustomerRow({ customer, onUpdate, onOpenDetail }) {
   const [editing, setEditing] = useState(false);
@@ -9,19 +9,21 @@ function CustomerRow({ customer, onUpdate, onOpenDetail }) {
   const [address, setAddress] = useState(null);
 
   useEffect(() => {
-    fetchAddress();
-  }, []);
-
-  const fetchAddress = async () => {
-    try {
-      const addressResponse = await get(`addresses?customerId=${customer.id}`);
-      if (addressResponse && addressResponse.length > 0) {
-        setAddress(addressResponse[0]);
+    const fetchAddress = async () => {
+      try {
+        const addressResponse = await get(`addresses?customerId=${customer.id}`);
+        if (addressResponse && addressResponse.length > 0) {
+          setAddress(addressResponse[0]);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    };
+  
+    fetchAddress();
+  
+  }, [customer.id, setAddress]); // Includi fetchAddress e le dipendenze correlate
+  
 
   const handleEdit = () => {
     setEditing(true);
@@ -57,17 +59,19 @@ function CustomerRow({ customer, onUpdate, onOpenDetail }) {
     <div className="customer-row" key={customer.id}>
       {editing ? (
         <>
-          <div>ID: {customer.id}</div>
+          <div className="customer-id">--ID: {customer.id}</div>
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
+          <div className="customer-id">--ID: {customer.id}</div>
           <input
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          <div className="customer-id">--ID: {customer.id}</div>
           <input
             type="text"
             value={phoneNumber}
@@ -82,25 +86,30 @@ function CustomerRow({ customer, onUpdate, onOpenDetail }) {
         </>
       ) : (
         <>
-          <div>ID: {customer.id}</div>
-          <span>Name: {customer.name}</span>
-          <span>Email: {customer.email}</span>
-          <span>Phone: {customer.phoneNumber}</span>
-          <button className="edit-button" onClick={handleEdit}>
-            Edit
-          </button>
-          <button className="detail-button" onClick={handleOpenDetail}>
-            Detail
-          </button>
+          <div className="customer-info">
+            <div>DATI CLIENTE</div>
+            <div>ID: {customer.id}</div>
+            <span>Name: {customer.name}</span>
+            <span>Email: {customer.email}</span>
+            <span>Phone: {customer.phoneNumber}</span>
+            <button className="edit-button" onClick={handleEdit}>
+              Edit
+            </button>
+            <button className="detail-button" onClick={handleOpenDetail}>
+              Detail
+            </button>
+          </div>
+          {address && (
+            <div className="address-details">
+              <div>INDIRIZZO: </div>
+              <br />
+              <div>Street: {address.street}</div>
+              <div>City: {address.city}</div>
+              <div>State: {address.state}</div>
+              <div>Zip Code: {address.zipCode}</div>
+            </div>
+          )}
         </>
-      )}
-      {address && (
-        <div className="address-details">
-          <div>Street: {address.street}</div>
-          <div>City: {address.city}</div>
-          <div>State: {address.state}</div>
-          <div>Zip Code: {address.zipCode}</div>
-        </div>
       )}
     </div>
   );
